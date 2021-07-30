@@ -1,5 +1,4 @@
 runtime: go114
-service: backend
 
 handlers:
 
