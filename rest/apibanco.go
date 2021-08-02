@@ -82,7 +82,7 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = json.Unmarshal(body, &apiBanco)
+	err = json.Unmarshal(body, apiBanco)
 	if err != nil {
 		log.Warningf(c, "Erro ao realizar unmarshal de APIBanco %v", err)
 		utils.RespondWithError(w, http.StatusBadRequest, 0, "Erro ao realizar unmarshal de APIBanco")
