@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"reflect"
 	"site/apibanco"
 	"site/utils"
 	"site/utils/log"
@@ -74,7 +73,7 @@ func BuscaAPIBanco(w http.ResponseWriter, r *http.Request) {
 func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 	c := r.Context()
 
-	var apiBanco = &apibanco.ApiBanco{}
+	var apiBanco = []apibanco.ApiBanco{}
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -83,25 +82,23 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = utils.JSONUnmarshalValidate(string(body), reflect.TypeOf([]apibanco.ApiBanco{}))
-	if err != nil {
-		log.Warningf(c, "Erro ao validar JSON recebido: %v", err)
-		utils.RespondWithError(w, http.StatusBadRequest, 0, err.Error())
-		return
-	}
-
-	err = json.Unmarshal(body, apiBanco)
+	err = json.Unmarshal(body, &apiBanco)
 	if err != nil {
 		log.Warningf(c, "Erro ao realizar unmarshal de APIBanco %v", err)
 		utils.RespondWithError(w, http.StatusBadRequest, 0, "Erro ao realizar unmarshal de APIBanco")
 		return
 	}
 
-	err = apibanco.InserirAPIBanco(c, apiBanco)
-	if err != nil {
-		log.Warningf(c, "Falha ao inserir APIBanco: %v", err)
-		utils.RespondWithError(w, http.StatusBadRequest, 0, "Falha ao inserir APIBanco")
-		return
+	bancos := apiBanco
+	for _, v := range bancos {
+		if v.Name != "" {
+			err = apibanco.InserirAPIBanco(c, &apibanco.ApiBanco{})
+			if err != nil {
+				log.Warningf(c, "Falha ao inserir slice de bancos %v", err)
+				utils.RespondWithError(w, http.StatusBadRequest, 0, "Falha ao inserir slice de bancos")
+				return
+			}
+		}
 	}
 
 	log.Debugf(c, "API Banco inserida com sucesso. %v", apiBanco)
