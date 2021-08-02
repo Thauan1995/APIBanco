@@ -90,6 +90,7 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i := range apiBancos {
+		log.Warningf(c, "Inserindo banco")
 		err = apibanco.InserirAPIBanco(c, &apiBancos[i])
 		if err != nil {
 			log.Warningf(c, "Falha ao inserir APIBanco: %v", err)
