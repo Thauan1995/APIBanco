@@ -73,7 +73,7 @@ func BuscaAPIBanco(w http.ResponseWriter, r *http.Request) {
 func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 	c := r.Context()
 
-	var apiBanco = []apibanco.ApiBanco{}
+	var apiBanco = &apibanco.ApiBanco{}
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -89,16 +89,11 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	bancos := apiBanco
-	for _, v := range bancos {
-		if v.Name != "" {
-			err = apibanco.InserirAPIBanco(c, &apibanco.ApiBanco{})
-			if err != nil {
-				log.Warningf(c, "Falha ao inserir slice de bancos %v", err)
-				utils.RespondWithError(w, http.StatusBadRequest, 0, "Falha ao inserir slice de bancos")
-				return
-			}
-		}
+	err = apibanco.InserirAPIBanco(c, apiBanco)
+	if err != nil {
+		log.Warningf(c, "Falha ao inserir APIBanco: %v", err)
+		utils.RespondWithError(w, http.StatusBadRequest, 0, "Falha ao inserir APIBanco")
+		return
 	}
 
 	log.Debugf(c, "API Banco inserida com sucesso. %v", apiBanco)
