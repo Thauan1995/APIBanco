@@ -124,7 +124,7 @@ func InserirAPIBanco(c context.Context, apiBanco *ApiBanco) error {
 	if apiBanco.FullName == "" {
 		return fmt.Errorf("Nome completo do banco inválido: %v", apiBanco.FullName)
 	}
-	return PutMultAPIBanco(c, []ApiBanco{})
+	return PutAPIBanco(c, apiBanco)
 }
 
 func FiltrarAPIBanco(c context.Context, apiBanco ApiBanco) ([]ApiBanco, error) {

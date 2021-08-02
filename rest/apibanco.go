@@ -73,7 +73,7 @@ func BuscaAPIBanco(w http.ResponseWriter, r *http.Request) {
 func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 	c := r.Context()
 
-	var apiBanco = &apibanco.ApiBanco{}
+	var apiBancos []apibanco.ApiBanco
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -82,21 +82,23 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = json.Unmarshal(body, apiBanco)
+	err = json.Unmarshal(body, &apiBancos)
 	if err != nil {
 		log.Warningf(c, "Erro ao realizar unmarshal de APIBanco %v", err)
 		utils.RespondWithError(w, http.StatusBadRequest, 0, "Erro ao realizar unmarshal de APIBanco")
 		return
 	}
 
-	err = apibanco.InserirAPIBanco(c, apiBanco)
-	if err != nil {
-		log.Warningf(c, "Falha ao inserir APIBanco: %v", err)
-		utils.RespondWithError(w, http.StatusBadRequest, 0, "Falha ao inserir APIBanco")
-		return
+	for i := range apiBancos {
+		err = apibanco.InserirAPIBanco(c, &apiBancos[i])
+		if err != nil {
+			log.Warningf(c, "Falha ao inserir APIBanco: %v", err)
+			utils.RespondWithError(w, http.StatusBadRequest, 0, "Falha ao inserir APIBanco")
+			return
+		}
 	}
 
-	log.Debugf(c, "API Banco inserida com sucesso. %v", apiBanco)
-	utils.RespondWithJSON(w, http.StatusOK, apiBanco)
+	log.Debugf(c, "API Banco inserida com sucesso.")
+	utils.RespondWithJSON(w, http.StatusOK, apiBancos)
 	return
 }
