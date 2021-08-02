@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"reflect"
 	"site/apibanco"
 	"site/utils"
 	"site/utils/log"
@@ -83,12 +82,12 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = utils.JSONUnmarshalValidate(string(body), reflect.TypeOf(apibanco.ApiBanco{}))
+	/*err = utils.JSONUnmarshalValidate(string(body), reflect.TypeOf(apibanco.ApiBanco{}))
 	if err != nil {
 		log.Warningf(c, "Erro ao validar JSON recebido: %v", err)
 		utils.RespondWithError(w, http.StatusBadRequest, 0, err.Error())
 		return
-	}
+	}*/
 
 	err = json.Unmarshal(body, apiBanco)
 	if err != nil {
