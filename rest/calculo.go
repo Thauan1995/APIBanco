@@ -10,6 +10,11 @@ import (
 func CalculoHandler(w http.ResponseWriter, r *http.Request) {
 	c := r.Context()
 
+	if r.Method == http.MethodGet {
+		CalculoHandler(w, r)
+		return
+	}
+
 	log.Warningf(c, "Inicializando soma dos codigos bancarios")
 	calculo := apibanco.CalculaCode()
 	if calculo == 0 {
