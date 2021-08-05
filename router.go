@@ -16,6 +16,9 @@ func main() {
 	// API Banco
 	r.HandleFunc("/banco", rest.APIBancoHandler)
 
+	// Calculo Code
+	r.HandleFunc("/banco/calculo", rest.CalculoHandler)
+
 	http.Handle("/", router)
 
 	var port = os.Getenv("PORT")
