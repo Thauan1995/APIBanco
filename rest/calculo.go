@@ -1,24 +1,38 @@
 package rest
 
 import (
+	"context"
 	"net/http"
 	"site/apibanco"
-	"site/utils"
 	"site/utils/log"
+
+	"cloud.google.com/go/datastore"
 )
 
 func CalculoHandler(w http.ResponseWriter, r *http.Request) {
-	c := r.Context()
 
 	if r.Method == http.MethodGet {
-		CalculoHandler(w, r)
+		CalculaCode(w, r)
 		return
 	}
+}
 
-	log.Warningf(c, "Inicializando soma dos codigos bancarios")
-	calculo := apibanco.CalculaCode()
-	if calculo == 0 {
-		log.Warningf(c, "Erro ao fazer o calculo: %v", calculo)
-		utils.RespondWithError(w, http.StatusBadRequest, 0, "Erro ao fazer a soma dos codigos bancarios")
+var c context.Context
+var keys []*datastore.Key
+
+func CalculaCode(w http.ResponseWriter, r *http.Request) int64 {
+	code, err := apibanco.GetMultAPIBanco(c, keys)
+	if err != nil {
+		log.Warningf(c, "Erro ao buscar apis banco")
+		return 0
 	}
+
+	var soma int64
+	soma = 0
+	for _, v := range code {
+		if v.Code != 0 {
+			soma += v.Code
+		}
+	}
+	return soma
 }
