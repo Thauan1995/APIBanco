@@ -101,5 +101,4 @@ func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
 
 	log.Debugf(c, "API Banco inserida com sucesso.")
 	utils.RespondWithJSON(w, http.StatusOK, apiBancos)
-	return
 }
