@@ -25,7 +25,6 @@ func APIBancoHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Warningf(c, "Método não permitido")
 	utils.RespondWithError(w, http.StatusMethodNotAllowed, 0, "Método não permitido")
-	return
 }
 
 func BuscaAPIBanco(w http.ResponseWriter, r *http.Request) {
@@ -67,7 +66,6 @@ func BuscaAPIBanco(w http.ResponseWriter, r *http.Request) {
 
 	log.Debugf(c, "Busca realizada com sucesso")
 	utils.RespondWithJSON(w, http.StatusOK, apiBanco)
-	return
 }
 
 func InsereAPIBanco(w http.ResponseWriter, r *http.Request) {
