@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"site/rest"
+	"site/APIBanco/rest"
 
 	"github.com/gorilla/mux"
 )

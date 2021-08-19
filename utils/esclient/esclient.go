@@ -2,7 +2,7 @@ package esclient
 
 import (
 	"context"
-	"site/config"
+	"site/APIBanco/config"
 
 	"github.com/olivere/elastic/v7"
 )

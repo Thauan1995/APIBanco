@@ -3,8 +3,8 @@ package rest
 import (
 	"context"
 	"net/http"
-	"site/apibanco"
-	"site/utils/log"
+	"site/APIBanco/apibanco"
+	"site/APIBanco/utils/log"
 
 	"cloud.google.com/go/datastore"
 )

@@ -295,10 +295,10 @@ Here are a few tips on how to get used to Elastic:
 - [X] cat aliases
 - [X] cat allocation
 - [X] cat count
-- [ ] cat fielddata
+- [X] cat fielddata
 - [X] cat health
 - [X] cat indices
-- [ ] cat master
+- [x] cat master
 - [ ] cat nodeattrs
 - [ ] cat nodes
 - [ ] cat pending tasks
@@ -308,7 +308,7 @@ Here are a few tips on how to get used to Elastic:
 - [ ] cat thread pool
 - [ ] cat shards
 - [ ] cat segments
-- [ ] cat snapshots
+- [X] cat snapshots
 - [ ] cat templates
 
 ### Cluster APIs
@@ -340,6 +340,8 @@ Here are a few tips on how to get used to Elastic:
   - [x] Common Terms Query
   - [x] Query String Query
   - [x] Simple Query String Query
+  - [x] Combined Fields Query
+  - [x] Intervals Query
 - Term level queries
   - [x] Term Query
   - [x] Terms Query

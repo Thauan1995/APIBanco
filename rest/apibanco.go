@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"site/apibanco"
-	"site/utils"
-	"site/utils/log"
+	"site/APIBanco/apibanco"
+	"site/APIBanco/utils"
+	"site/APIBanco/utils/log"
 	"strconv"
 )
 

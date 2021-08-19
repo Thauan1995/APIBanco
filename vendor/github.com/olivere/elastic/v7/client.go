@@ -26,7 +26,7 @@ import (
 
 const (
 	// Version is the current version of Elastic.
-	Version = "7.0.26"
+	Version = "7.0.27"
 
 	// DefaultURL is the default endpoint of Elasticsearch on the local machine.
 	// It is used e.g. when initializing a new Client without a specific URL.
@@ -1885,7 +1885,6 @@ func (c *Client) GetFieldMapping() *IndicesGetFieldMappingService {
 
 // -- cat APIs --
 
-// TODO cat master
 // TODO cat nodes
 // TODO cat pending tasks
 // TODO cat plugins
@@ -1893,6 +1892,11 @@ func (c *Client) GetFieldMapping() *IndicesGetFieldMappingService {
 // TODO cat thread pool
 // TODO cat shards
 // TODO cat segments
+
+// CatMaster returns information about the master node
+func (c *Client) CatMaster() *CatMasterService {
+	return NewCatMasterService(c)
+}
 
 // CatFielddata returns information about the amount of heap memory currently used by the field data cache.
 func (c *Client) CatFielddata() *CatFielddataService {
@@ -1927,6 +1931,11 @@ func (c *Client) CatIndices() *CatIndicesService {
 // CatShards returns information about shards.
 func (c *Client) CatShards() *CatShardsService {
 	return NewCatShardsService(c)
+}
+
+// CatSnapshots returns information about snapshots.
+func (c *Client) CatSnapshots() *CatSnapshotsService {
+	return NewCatSnapshotsService(c)
 }
 
 // -- Ingest APIs --

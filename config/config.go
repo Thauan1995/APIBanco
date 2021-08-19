@@ -3,8 +3,8 @@ package config
 import (
 	"context"
 	"fmt"
-	"site/utils/consts"
-	"site/utils/log"
+	"site/APIBanco/utils/consts"
+	"site/APIBanco/utils/log"
 	"strings"
 
 	"cloud.google.com/go/datastore"

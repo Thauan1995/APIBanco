@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"site/utils/consts"
-	"site/utils/log"
+	"site/APIBanco/utils/consts"
+	"site/APIBanco/utils/log"
 
 	"cloud.google.com/go/datastore"
 )

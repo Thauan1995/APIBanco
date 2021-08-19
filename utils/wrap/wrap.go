@@ -3,9 +3,9 @@ package wrap
 import (
 	"context"
 	"net/http"
-	"site/utils"
-	"site/utils/log"
-	"site/utils/wrap/keys"
+	"site/APIBanco/utils"
+	"site/APIBanco/utils/log"
+	"site/APIBanco/utils/wrap/keys"
 )
 
 func Wrap(h http.Handler) http.Handler {

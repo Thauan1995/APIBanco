@@ -3,8 +3,8 @@ package apibanco
 import (
 	"context"
 	"fmt"
-	"site/utils/consts"
-	"site/utils/log"
+	"site/APIBanco/utils/consts"
+	"site/APIBanco/utils/log"
 
 	"cloud.google.com/go/datastore"
 )
